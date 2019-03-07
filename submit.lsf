@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#BSUB -P PROJ123
+#BSUB -J add_vec
+#BSUB -o add_vec.%J
+#BSUB -nnodes 1
+#BSUB -W 10
+
+date
+
+jsrun -n1 -c1 -g1 -a1 ./run
