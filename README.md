@@ -95,7 +95,7 @@ We'll ignore the `add_vectors` "kernel" function for the moment and jump down to
     size_t bytes = N*sizeof(double);
 ```
 
-Now we allocate memory on the CPU for arrays A, B and C:
+Next, we allocate memory on the CPU for arrays A, B and C:
 
 ```c
     // Allocate memory for arrays A, B, and C on host
@@ -191,6 +191,44 @@ And free the memory on the GPU:
     cudaFree(d_B);
     cudaFree(d_C);
 ```
+
+## Compiling and Running on Summit
+
+To run this program on Summit, you must first load the CUDA module:
+
+```
+$ module load cuda
+```
+
+Now compile the program:
+
+```
+$ make
+```
+
+Now submit the job using the `submit.lsf` batch script (make sure to change `PROJ123` to a project you are associated with:
+
+```
+$ bsub submit.lsf
+```
+
+You can check the status of your job with the `jobstat` command. Once your job has completed, you can view the results in the output file named `add_vec.JOBID`
+
+```
+$ cat add_vec.JOBID
+
+---------------------------
+__SUCCESS__
+---------------------------
+N                 = 1048576
+Threads Per Block = 256
+Blocks In Grid    = 4096
+---------------------------
+
+...
+
+```
+
 
 ## Helpful Links
 
