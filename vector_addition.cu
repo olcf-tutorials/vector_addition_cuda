@@ -51,12 +51,13 @@ int main()
 	cudaMemcpy(C, d_C, bytes, cudaMemcpyDeviceToHost);
 
 	// Verify results
+    double tolerance = 1.0e-14;
 	for(int i=0; i<N; i++)
 	{
-		if(C[i] != 3.0)
+		if( fabs(C[i] - 3.0) > tolerance)
 		{ 
 			printf("\nError: value of C[%d] = %d instead of 3.0\n\n", i, C[i]);
-			exit(-1);
+			exit(1);
 		}
 	}	
 
